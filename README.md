@@ -1,6 +1,6 @@
 # Library-App
 ## Background
-An app for data keeping in library.
+An app for data keeping in library. Created using ASP.NET MVC.
 
 ## Requirements
 - Shows all books in the main page
