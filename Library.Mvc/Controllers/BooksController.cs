@@ -21,7 +21,7 @@ namespace Library.Mvc.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            var libraryDBContext = _context.Books.Include(b => b.Author);
+            var libraryDBContext = _context.Books.OrderBy(x => x.Title).Include(b => b.Author);
             return View(await libraryDBContext.ToListAsync());
         }
 
