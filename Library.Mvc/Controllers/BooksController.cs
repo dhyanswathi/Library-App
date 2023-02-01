@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Library.Mvc.Models;
+using Library.Mvc.ViewModel;
 
 namespace Library.Mvc.Controllers
 {
@@ -41,7 +42,16 @@ namespace Library.Mvc.Controllers
                 return NotFound();
             }
 
-            return View(book);
+            var bookModel = new BookViewModel
+            {
+                Title = book.Title,
+                BookId= book.BookId,
+                AuthorName = book.Author.AuthorName,
+                BorrowStatus = "",
+                ExpectedReturn = DateTime.Now
+            };
+
+            return View(bookModel);
         }
 
         // GET: Books/Create
