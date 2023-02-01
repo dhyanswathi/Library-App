@@ -49,9 +49,7 @@ namespace Library.Mvc.Models
             modelBuilder.Entity<BorrowedBook>(entity =>
             {
                 entity.HasKey(e => e.BorrowId)
-                    .HasName("PK__Borrowed__4295F83FDB516ADF");
-
-                entity.Property(e => e.BorrowId).ValueGeneratedNever();
+                    .HasName("PK__BooksBor__4295F83FA67EA419");
 
                 entity.Property(e => e.BorrowDate).HasColumnType("datetime");
 
@@ -60,12 +58,12 @@ namespace Library.Mvc.Models
                 entity.HasOne(d => d.Book)
                     .WithMany(p => p.BorrowedBooks)
                     .HasForeignKey(d => d.BookId)
-                    .HasConstraintName("FK__BorrowedB__BookI__412EB0B6");
+                    .HasConstraintName("FK__BooksBorr__BookI__49C3F6B7");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BorrowedBooks)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__BorrowedB__UserI__4222D4EF");
+                    .HasConstraintName("FK__BooksBorr__UserI__4AB81AF0");
             });
 
             modelBuilder.Entity<User>(entity =>
