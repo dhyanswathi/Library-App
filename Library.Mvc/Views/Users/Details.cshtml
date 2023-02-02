@@ -1,4 +1,4 @@
-@model Library.Mvc.ViewModel.UserViewModel
+@model Library.Mvc.Models.User
 
 @{
     ViewData["Title"] = "Details";
@@ -10,62 +10,26 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.user.Name)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.user.Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.user.Email)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.user.Email)
+            @Html.DisplayFor(model => model.Email)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.user.Age)
+            @Html.DisplayNameFor(model => model.Age)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.user.Age)
+            @Html.DisplayFor(model => model.Age)
         </dd>
     </dl>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.books[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.books[0].Author.AuthorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.books[0].BorrowDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.books[0].ReturnDate)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.books)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author.AuthorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BorrowDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReturnDate)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.UserId">Edit</a> |
     <a asp-action="Index">Back to List</a>

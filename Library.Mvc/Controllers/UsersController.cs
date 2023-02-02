@@ -38,21 +38,12 @@ namespace Library.Mvc.Controllers
             var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.UserId == id);
 
-            var booksQuery =
-              from m in _context.BorrowedBooks
-              select m;
-
             if (user == null)
             {
                 return NotFound();
             }
-            var userModel = new UserViewModel
-            {
-                user = user,
-                books = await booksQuery.Where(x => x.UserId == id).ToListAsync()
-            };
 
-            return View(userModel);
+            return View(user);
         }
 
         // GET: Users/Create
