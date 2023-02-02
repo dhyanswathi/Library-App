@@ -1,15 +1,27 @@
-@model Library.Mvc.Models.BorrowedBook
+@model Library.Mvc.ViewModel.BorrowViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Details of the book</h1>
 
 <div>
-    <h4>BorrowedBook</h4>
+    <h4>Borrowed Book</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BorrowDate)
         </dt>
@@ -17,23 +29,29 @@
             @Html.DisplayFor(model => model.BorrowDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReturnDate)
+                @Html.DisplayNameFor(model => model.ExpectedReturn)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReturnDate)
+            @Html.DisplayFor(model => model.ExpectedReturn)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Book)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Book.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
+        @if (Model.ReturnDate != null)
+        {
+            <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.ReturnDate)
+             </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.ReturnDate)
+            </dd>
+        }
+        @if (Model.Penalty != 0)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Penalty)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Penalty)
+            </dd>
+        }
     </dl>
 </div>
 <div>
