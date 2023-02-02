@@ -86,7 +86,7 @@ namespace Library.Mvc.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "AuthorId", "AuthorName");
+            ViewData["AuthorId"] = new SelectList(_context.Authors.OrderBy(x => x.AuthorName), "AuthorId", "AuthorName");
             return View();
         }
 
@@ -103,7 +103,7 @@ namespace Library.Mvc.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "AuthorId", "AuthorName", book.AuthorId);
+            ViewData["AuthorId"] = new SelectList(_context.Authors.OrderBy(x => x.AuthorName), "AuthorId", "AuthorName", book.AuthorId);
             return View(book);
         }
 
@@ -120,7 +120,7 @@ namespace Library.Mvc.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "AuthorId", "AuthorName", book.AuthorId);
+            ViewData["AuthorId"] = new SelectList(_context.Authors.OrderBy(x => x.AuthorName), "AuthorId", "AuthorName", book.AuthorId);
             return View(book);
         }
 
@@ -156,7 +156,7 @@ namespace Library.Mvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "AuthorId", "AuthorName", book.AuthorId);
+            ViewData["AuthorId"] = new SelectList(_context.Authors.OrderBy(x => x.AuthorName), "AuthorId", "AuthorName", book.AuthorId);
             return View(book);
         }
 

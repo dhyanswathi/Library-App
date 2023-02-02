@@ -61,7 +61,7 @@ namespace Library.Mvc.Controllers
             {
                 _context.Add(author);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(BooksController.Create));
             }
             return View(author);
         }

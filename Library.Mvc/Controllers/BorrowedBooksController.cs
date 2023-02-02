@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Library.Mvc.Models;
+using Library.Mvc.ViewModel;
 
 namespace Library.Mvc.Controllers
 {
@@ -21,7 +22,7 @@ namespace Library.Mvc.Controllers
         // GET: BorrowedBooks
         public async Task<IActionResult> Index()
         {
-            var libraryDBContext = _context.BorrowedBooks.Include(b => b.Book).Include(b => b.User);
+            var libraryDBContext = _context.BorrowedBooks.OrderByDescending(x => x.ReturnDate).Include(b => b.Book).Include(b => b.User);
             return View(await libraryDBContext.ToListAsync());
         }
 
@@ -41,8 +42,22 @@ namespace Library.Mvc.Controllers
             {
                 return NotFound();
             }
+            var diff = (borrowedBook.ReturnDate - borrowedBook.BorrowDate);
+            var penaltyDays = int.Parse(diff.ToString());
+            var penalty = penaltyDays > 30 ? ((penaltyDays - 30) * 10) : 0;
 
-            return View(borrowedBook);
+            var borrowModel = new BorrowViewModel
+            {
+                BorrowId = borrowedBook.BorrowId,
+                BookTitle = borrowedBook.Book.Title,
+                UserName = borrowedBook.User.Name,
+                BorrowDate = borrowedBook.BorrowDate,
+                ExpectedReturn = borrowedBook.BorrowDate.AddDays(30),
+                ReturnDate = borrowedBook.ReturnDate,
+                Penalty = penalty
+            };
+
+            return View(borrowModel);
         }
 
         // GET: BorrowedBooks/Create
