@@ -22,7 +22,7 @@ namespace Library.Mvc.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Authors != null ? 
-                          View(await _context.Authors.ToListAsync()) :
+                          View(await _context.Authors.OrderBy(x => x.AuthorName).ToListAsync()) :
                           Problem("Entity set 'LibraryDBContext.Authors'  is null.");
         }
 
