@@ -42,8 +42,9 @@ namespace Library.Mvc.Controllers
             {
                 return NotFound();
             }
+           
             var diff = (borrowedBook.ReturnDate - borrowedBook.BorrowDate);
-            var penaltyDays = int.Parse(diff.ToString());
+            var penaltyDays = diff != null ? diff.Value.TotalDays:0; 
             var penalty = penaltyDays > 30 ? ((penaltyDays - 30) * 10) : 0;
 
             var borrowModel = new BorrowViewModel
@@ -54,7 +55,7 @@ namespace Library.Mvc.Controllers
                 BorrowDate = borrowedBook.BorrowDate,
                 ExpectedReturn = borrowedBook.BorrowDate.AddDays(30),
                 ReturnDate = borrowedBook.ReturnDate,
-                Penalty = penalty
+                Penalty = (int)penalty
             };
 
             return View(borrowModel);
