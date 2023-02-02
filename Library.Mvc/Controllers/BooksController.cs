@@ -20,10 +20,37 @@ namespace Library.Mvc.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string bookAuthor, string searchString)
         {
             var libraryDBContext = _context.Books.OrderBy(x => x.Title).Include(b => b.Author);
             return View(await libraryDBContext.ToListAsync());
+
+            IQueryable<string> authorQuery =
+                from m in _context.Books
+                orderby m.Author.AuthorName
+                select m.Author.AuthorName;
+
+            var booksQuery =
+              from m in _context.Books
+              select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                booksQuery = booksQuery.Where(s => s.Title!.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(bookAuthor))
+            {
+                booksQuery = booksQuery.Where(x => x.Author.AuthorName == bookAuthor);
+            }
+
+            var model = new BookAuthorViewModel
+            {
+                Authors = new SelectList(await authorQuery.Distinct().ToListAsync()),
+                Books = await booksQuery.ToListAsync()
+            };
+
+            return View(model);
         }
 
         // GET: Books/Details/5
