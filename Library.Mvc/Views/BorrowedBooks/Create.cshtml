@@ -12,23 +12,23 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BorrowDate" class="control-label"></label>
+                <label asp-for="BorrowDate" class="control-label">Date of issue</label>
                 <input asp-for="BorrowDate" class="form-control" />
                 <span asp-validation-for="BorrowDate" class="text-danger"></span>
-            </div>
+            </div><br/>
             <div class="form-group">
-                <label asp-for="ReturnDate" class="control-label"></label>
+                <label asp-for="ReturnDate" class="control-label">Date of return</label>
                 <input asp-for="ReturnDate" class="form-control" />
                 <span asp-validation-for="ReturnDate" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="BookId" class="control-label"></label>
+                <label asp-for="BookId" class="control-label">Select the required book from here</label>
                 <select asp-for="BookId" class ="form-control" asp-items="ViewBag.BookId"></select>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
+                <label asp-for="UserId" class="control-label">Choose the name of the member</label>
                 <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div>
+            </div><br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

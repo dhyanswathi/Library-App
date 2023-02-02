@@ -1,4 +1,4 @@
-@model IEnumerable<Library.Mvc.Models.BorrowedBook>
+@model IEnumerable<Library.Mvc.Models.BorrowedBook>;
 
 @{
     ViewData["Title"] = "Index";
@@ -44,16 +44,8 @@
                     @Html.DisplayFor(modelItem => item.User.Email)
                 </td>
                 <td>
-                    @if (item.ReturnDate == null)
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.BorrowId">Return</a>|
-                    }
-                    else
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.BorrowId">Edit</a>|
-                    }
-
-                    <a asp-action="Details" asp-route-id="@item.BorrowId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.BorrowId">Return</a>
+                    <a asp-action="Details" asp-route-id="@item.BorrowId">Details</a> 
                     <a asp-action="Delete" asp-route-id="@item.BorrowId">Delete</a>
                 </td>
             </tr>

@@ -4,9 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit book details</h1>
 
-<h4>Book</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,12 +13,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BookId" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="control-label">Title of the book</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
+            </div><br/>
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
+                <label asp-for="AuthorId" class="control-label">Name of the author</label>
                 <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
                 <span asp-validation-for="AuthorId" class="text-danger"></span>
             </div>
