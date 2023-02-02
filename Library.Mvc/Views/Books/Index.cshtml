@@ -1,4 +1,4 @@
-@model IEnumerable<Library.Mvc.Models.Book>
+@model Library.Mvc.ViewModel.BookAuthorViewModel;
 
 @{
     ViewData["Title"] = "Index";
@@ -7,22 +7,33 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add New Book</a>
 </p>
+<form asp-controller="Books" asp-action="Index" method="get">
+    <p>
+        <select asp-for="BookAuthor" asp-items="Model.Authors">
+            <option value="">All</option>
+        </select>
+
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Books[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
+                @Html.DisplayNameFor(model => model.Books[0].Author.AuthorName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Books) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

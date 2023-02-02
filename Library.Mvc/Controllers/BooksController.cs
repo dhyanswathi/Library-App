@@ -22,8 +22,6 @@ namespace Library.Mvc.Controllers
         // GET: Books
         public async Task<IActionResult> Index(string bookAuthor, string searchString)
         {
-            var libraryDBContext = _context.Books.OrderBy(x => x.Title).Include(b => b.Author);
-            return View(await libraryDBContext.ToListAsync());
 
             IQueryable<string> authorQuery =
                 from m in _context.Books
