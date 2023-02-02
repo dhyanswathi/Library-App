@@ -45,7 +45,7 @@ namespace Library.Mvc.Controllers
             var model = new BookAuthorViewModel
             {
                 Authors = new SelectList(await authorQuery.Distinct().ToListAsync()),
-                Books = await booksQuery.ToListAsync()
+                Books = await booksQuery.OrderBy(x => x.Title).Include(b => b.Author).ToListAsync()
             };
 
             return View(model);
@@ -67,13 +67,17 @@ namespace Library.Mvc.Controllers
                 return NotFound();
             }
 
+            var borrow = _context.BorrowedBooks.FirstOrDefault(x => x.BookId == id);
+                var borrowStatus =  borrow != null ? "Not available" : "Available";
+
+
             var bookModel = new BookViewModel
             {
                 Title = book.Title,
-                BookId= book.BookId,
+                BookId = book.BookId,
                 AuthorName = book.Author.AuthorName,
-                BorrowStatus = "",
-                ExpectedReturn = DateTime.Now
+                BorrowStatus = borrowStatus,
+                ExpectedReturn = borrow?.BorrowDate.AddDays(30)
             };
 
             return View(bookModel);
