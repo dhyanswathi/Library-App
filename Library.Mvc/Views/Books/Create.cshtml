@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Add new Book</h1>
 
-<h4>Book</h4>
+<h4>Enter Details of book here</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,8 +18,12 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
+                <label asp-for="AuthorId" class="control-label">Select author from the list</label>
                 <select asp-for="AuthorId" class ="form-control" asp-items="ViewBag.AuthorId"></select>
+            </div>
+            <div  >
+                <p>If the author is not shown in the list, add here</p>
+                <button> <a class="nav-link text-dark" asp-area="" asp-controller="Authors" asp-action="Create">Add Author to the list</a></button>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

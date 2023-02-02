@@ -68,7 +68,7 @@ namespace Library.Mvc.Controllers
             }
 
             var borrow = _context.BorrowedBooks.FirstOrDefault(x => x.BookId == id);
-                var borrowStatus =  borrow != null ? "Not available" : "Available";
+                var borrowStatus = (borrow == null || borrow.ReturnDate != null) ? "Available" : "Not available";
 
 
             var bookModel = new BookViewModel
